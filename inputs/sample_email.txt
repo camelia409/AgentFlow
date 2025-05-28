@@ -1,0 +1,7 @@
+From: abi@example.com
+Subject: Urgent Complaint
+
+Dear Team,
+We received a defective product (Order #456). Please address this ASAP.
+Best,
+Abi

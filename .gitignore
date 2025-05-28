@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environment
+venv/
+env/
+.venv/
+ENV/
+
+# Streamlit
+.streamlit/
+.streamlit/cache/
+*.streamlit
+
+# Cached models
+model_cache/
+
+# Temporary input/output files
+inputs/uploaded_*
+outputs/
+*.log
+
+# Demo video
+vid/
+*.mp4
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Environment variables
+.env
+*.env
+
+# Jupyter notebooks (if any)
+*.ipynb_checkpoints
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+*.whl
+
+# Testing
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.pytest_cache/
+htmlcov/
+
+# Ensure sample files are not ignored
+!inputs/sample.pdf
+!inputs/sample.json
+!inputs/sample_email.txt
+!vid/demo.mp4
