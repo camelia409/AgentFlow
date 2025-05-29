@@ -22,6 +22,7 @@ def main():
     st.title("Multi-Agent AI System")
     st.markdown("Upload a PDF, JSON, or Email (text) file to process it through the AI system.")
 
+    # Initialize session state
     if "memory_store" not in st.session_state:
         st.session_state.memory_store = MemoryStore()
         st.session_state.classifier = ClassifierAgent(st.session_state.memory_store)
@@ -42,16 +43,19 @@ def main():
                 f.write(uploaded_file.getbuffer())
 
             with st.spinner("Processing..."):
-                thread_id, result = st.session_state.classifier.classify_and_route(file_path, source=uploaded_file.name)
-                st.session_state.processed_files.add(file_key)
-                st.success("Processing complete!")
-
-            st.subheader("Processing Results")
-            st.json(result)
-            if result["data"].get("intent", "Unknown") == "Unknown":
-                st.warning("Intent classification failed. Check input content or try another file.")
-
-            os.remove(file_path)
+                try:
+                    thread_id, result = st.session_state.classifier.classify_and_route(file_path, source=uploaded_file.name)
+                    st.session_state.processed_files.add(file_key)
+                    st.success("Processing complete!")
+                    st.subheader("Processing Results")
+                    st.json(result)
+                    if result["data"].get("intent", "Unknown") == "Unknown":
+                        st.warning("Intent classification failed. Check input content or try another file.")
+                except Exception as e:
+                    st.error(f"Error processing {uploaded_file.name}: {str(e)}")
+                finally:
+                    if os.path.exists(file_path):
+                        os.remove(file_path)
         else:
             st.info("File already processed.")
 
@@ -63,6 +67,15 @@ def main():
             for k, v in memory_data.items()
         ])
         st.table(df)
+
+        # Add download button for CSV export
+        csv = df.to_csv(index=False)
+        st.download_button(
+            label="Download Logs as CSV",
+            data=csv,
+            file_name="memory_logs.csv",
+            mime="text/csv"
+        )
 
         st.subheader("Intent Distribution")
         intent_counts = df["intent"].value_counts().to_dict()
@@ -110,11 +123,14 @@ def main():
                 file_key = f"{file_path}_{os.path.getsize(file_path)}"
                 if file_key not in st.session_state.processed_files:
                     st.write(f"Processing {file_path}...")
-                    thread_id, result = st.session_state.classify_and_route(file_path, source=file_path)
-                    st.session_state.processed_files.add(file_key)
-                    st.json(result)
-                    if result["data"].get("intent", "Unknown") == "Unknown":
-                        st.warning(f"Intent classification failed for {file_path}. Check input content.")
+                    try:
+                        thread_id, result = st.session_state.classifier.classify_and_route(file_path, source=file_path)
+                        st.session_state.processed_files.add(file_key)
+                        st.json(result)
+                        if result["data"].get("intent", "Unknown") == "Unknown":
+                            st.warning(f"Intent classification failed for {file_path}. Check input content.")
+                    except Exception as e:
+                        st.error(f"Error processing {file_path}: {str(e)}")
                 else:
                     st.info(f"{file_path} already processed.")
             else:
