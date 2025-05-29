@@ -21,14 +21,8 @@ ENV/
 # Cached models
 model_cache/
 
-# Temporary input/output files
-inputs/uploaded_*
-outputs/
-*.log
 
-# Demo video
-vid/
-*.mp4
+
 
 # IDE and editor files
 .vscode/
@@ -66,8 +60,3 @@ coverage.xml
 .pytest_cache/
 htmlcov/
 
-# Ensure sample files are not ignored
-!inputs/sample.pdf
-!inputs/sample.json
-!inputs/sample_email.txt
-!vid/demo.mp4

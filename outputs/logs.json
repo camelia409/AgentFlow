@@ -1,0 +1,70 @@
+{
+  "5b0587f4-a6c9-4a4a-bd30-6a6e2aa0e29a": {
+    "source": "sample.pdf",
+    "type": "PDF",
+    "intent": "Invoice",
+    "timestamp": 1748518378.901478,
+    "extracted_data": {
+      "status": "success",
+      "data": {
+        "sender": "Unknown",
+        "subject": "Unknown",
+        "body": "Invoice #123\nAmount: $500\nDate: 2025-05-28\nCompany: XYZ Corp",
+        "urgency": "Normal",
+        "intent": "Invoice"
+      },
+      "anomalies": []
+    }
+  },
+  "94537ec8-0190-40db-b685-53292c300a4c": {
+    "source": "inputs/sample.pdf",
+    "type": "PDF",
+    "intent": "Invoice",
+    "timestamp": 1748518406.591969,
+    "extracted_data": {
+      "status": "success",
+      "data": {
+        "sender": "Unknown",
+        "subject": "Unknown",
+        "body": "Invoice #123\nAmount: $500\nDate: 2025-05-28\nCompany: XYZ Corp",
+        "urgency": "Normal",
+        "intent": "Invoice"
+      },
+      "anomalies": []
+    }
+  },
+  "1a015951-66ac-4db8-bf6e-ee169be8752e": {
+    "source": "inputs/sample.json",
+    "type": "JSON",
+    "intent": "Request for Quote (RFQ)",
+    "timestamp": 1748518408.8353803,
+    "extracted_data": {
+      "status": "success",
+      "data": {
+        "request_type": "RFQ",
+        "item": "Widgets",
+        "quantity": 100,
+        "company": "ABC Corp",
+        "intent": "Request for Quote (RFQ)"
+      },
+      "anomalies": []
+    }
+  },
+  "eb1e4bac-33c1-427b-83af-2618fa030c70": {
+    "source": "inputs/sample_email.txt",
+    "type": "Email",
+    "intent": "Complaint",
+    "timestamp": 1748518408.8423696,
+    "extracted_data": {
+      "status": "success",
+      "data": {
+        "sender": "abi@example.com",
+        "subject": "Urgent Complaint",
+        "body": "Dear Team,\nWe received a defective product (Order #456). Please address this ASAP.\nBest,\nAbi",
+        "urgency": "High",
+        "intent": "Complaint"
+      },
+      "anomalies": []
+    }
+  }
+}
